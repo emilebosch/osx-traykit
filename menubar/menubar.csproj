@@ -57,7 +57,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="MonoMac" />
     <Reference Include="masshortcut">
-      <HintPath>..\..\..\dev\z\MASShortcutSharp\masshortcut.dll</HintPath>
+      <HintPath>masshortcut.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
