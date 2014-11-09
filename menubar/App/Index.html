@@ -1,0 +1,21 @@
+﻿
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>Woop</h1>
+		<script>
+			window.yolo.setHotkey({cb: function() {
+				window.yolo.show();
+			}});	
+		</script>
+		<button onclick="window.yolo.alert('hello','hello')">ALERT</button>
+		<button onclick="window.yolo.notify('hello world','yeah')">NOTIFY</button>
+		<button onclick="window.yolo.show()">SHOW</button>
+		<button onclick="window.yolo.hide()">HIDE</button>
+		<button onclick="window.yolo.setPinned(true)">PIN</button>
+		<button onclick="window.yolo.setPinned(false)">UNPIN</button>
+		<button onclick="window.yolo.resize(500,800)">RESIZE</button>
+		<button onclick="window.yolo.setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_4 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B350 Safari/8536.25');window.location='https://github.com/RoosHQ/HalloRoos/issues';">SET USER AGENT</button>
+</html>
