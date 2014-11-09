@@ -81,8 +81,8 @@ namespace menubar
 			wv.DrawsBackground = false;
 
 			// Set webscript object
-			wv.WindowScriptObject.SetValueForKey(this, new NSString("yolo"));
-			wv.MainFrame.LoadRequest(new NSUrlRequest(new NSUrl("file:///Users/emilebosch/Projects/menubar/menubar/App/Index.html")));
+			wv.WindowScriptObject.SetValueForKey(this, new NSString("tray"));
+			wv.MainFrame.LoadRequest(new NSUrlRequest(new NSUrl("file:///Users/emilebosch/dev/z/osx-traykit/menubar/App/Index.html")));
 
 			statusItem = NSStatusBar.SystemStatusBar.CreateStatusItem(30);
       statusItem.Title = "!"; 
