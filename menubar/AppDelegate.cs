@@ -88,10 +88,16 @@ namespace menubar
       statusItem.Title = "!"; 
 			statusItem.HighlightMode = true;
 			statusItem.Action = new Selector ("HandleMenu");
+
+			MASShortcut.AddGlobalHotkeyMonitor (new MASShortcut (Keycode.kVK_F12, EventModifier.NSCommandKeyMask), delegate { ShowPopup(!IsVisible()); });
+
+			MASShortcut.AddGlobalHotkeyMonitor(new MASShortcut(Keycode.kVK_F11, EventModifier.NSCommandKeyMask), delegate { 
+		
+			});
 		}
 
 		[Export("HandleMenu")]
-		public void click() { ShowPopup (true); }
+		public void click() { ShowPopup (!IsVisible()); }
 			
 		//**** SELECTORS
 
@@ -154,8 +160,7 @@ namespace menubar
 
 		[Export("setHotkey:")]
 		public void SetHotkey(MonoMac.WebKit.WebScriptObject wo) {
-			var shortcut1 = new MASShortcut(Keycode.kVK_F1, EventModifier.NSCommandKeyMask);
-			MASShortcut.AddGlobalHotkeyMonitor(shortcut1, delegate { 
+			MASShortcut.AddGlobalHotkeyMonitor(new MASShortcut(Keycode.kVK_F1, EventModifier.NSCommandKeyMask), delegate { 
 				wo.CallWebScriptMethod ("cb", new NSObject[]{ });
 			});
 		}
