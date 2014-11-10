@@ -67,7 +67,7 @@ namespace menubar
 
 		public override void FinishedLaunching (NSObject notification)
 		{
-			allowed = new List<string>{ "alert:","notify:","showPopup:","resize:","setUserAgent:","setPinned:","setHotkey:","isVisible:"};
+			allowed = new List<string>{ "alert:","notify:","showPopup:","resize:","setUserAgent:","setPinned:","setHotkey:","isVisible:","quit:","openSite:"};
 
 			this.window.Level = NSWindowLevel.Floating;
 			this.window.IsOpaque = false;
@@ -88,6 +88,10 @@ namespace menubar
       statusItem.Title = "!"; 
 			statusItem.HighlightMode = true;
 			statusItem.Action = new Selector ("HandleMenu");
+
+			var menu = new NSMenu ();
+			menu.AddItem(new NSMenuItem("Quit", (e,v)=> {Quit();}));
+			menu.AddItem(new NSMenuItem("Open Site..",(e,v)=>{ OpenSite();}));
 
 			MASShortcut.AddGlobalHotkeyMonitor (new MASShortcut (Keycode.kVK_F12, EventModifier.NSCommandKeyMask), delegate { ShowPopup(!IsVisible()); });
 
@@ -165,9 +169,19 @@ namespace menubar
 			});
 		}
 
+		[Export("quit:")]
+		public void Quit() {
+			
+		}
+
 		[Export("setPinned:")]
 		public void SetPinned(bool value) {
 			pinned = value;
+		}
+
+		[Export("openSite:")]
+		public void OpenSite() {
+		
 		}
 
 		[Export("isVisible:")]
