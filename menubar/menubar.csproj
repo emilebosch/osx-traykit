@@ -66,9 +66,15 @@
     <Compile Include="AppDelegate.designer.cs">
       <DependentUpon>AppDelegate.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenSite.cs" />
+    <Compile Include="OpenSiteController.cs" />
+    <Compile Include="OpenSite.designer.cs">
+      <DependentUpon>OpenSite.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />
+    <InterfaceDefinition Include="OpenSite.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

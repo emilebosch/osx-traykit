@@ -168,7 +168,7 @@ namespace menubar
 
 		[Export("quit:")]
 		public void Quit() {
-			
+			NSApplication.SharedApplication.Terminate (this);
 		}
 
 		[Export("setPinned:")]
@@ -178,7 +178,16 @@ namespace menubar
 
 		[Export("openSite:")]
 		public void OpenSite() {
-		
+			var opensite = new OpenSiteController ();
+			opensite.Done += delegate {
+				if(String.IsNullOrEmpty(opensite.Url)) return;
+
+				ShowPopup(true);
+				if(opensite.IOS == NSCellStateValue.On) SetUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_4 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B350 Safari/8536.25");
+				this.webview2.MainFrame.LoadRequest(new NSUrlRequest(new NSUrl(opensite.Url)));
+			};
+
+			opensite.Window.MakeKeyAndOrderFront (null);
 		}
 
 		[Export("isVisible:")]
