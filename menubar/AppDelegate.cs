@@ -94,10 +94,7 @@ namespace menubar
 			menu.AddItem(new NSMenuItem("Open Site..",(e,v)=>{ OpenSite();}));
 
 			MASShortcut.AddGlobalHotkeyMonitor (new MASShortcut (Keycode.kVK_F12, EventModifier.NSCommandKeyMask), delegate { ShowPopup(!IsVisible()); });
-
-			MASShortcut.AddGlobalHotkeyMonitor(new MASShortcut(Keycode.kVK_F11, EventModifier.NSCommandKeyMask), delegate { 
-		
-			});
+			MASShortcut.AddGlobalHotkeyMonitor(new MASShortcut(Keycode.kVK_F11, EventModifier.NSCommandKeyMask), delegate { statusItem.PopUpStatusItemMenu(menu); });
 		}
 
 		[Export("HandleMenu")]
