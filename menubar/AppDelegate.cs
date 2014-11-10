@@ -67,7 +67,7 @@ namespace menubar
 
 		public override void FinishedLaunching (NSObject notification)
 		{
-			allowed = new List<string>{ "alert:","notify:","show:","hide:","resize:","setUserAgent:","setPinned:","setHotkey:"};
+			allowed = new List<string>{ "alert:","notify:","showPopup:","resize:","setUserAgent:","setPinned:","setHotkey:","isVisible:"};
 
 			this.window.Level = NSWindowLevel.Floating;
 			this.window.IsOpaque = false;
@@ -88,26 +88,6 @@ namespace menubar
       statusItem.Title = "!"; 
 			statusItem.HighlightMode = true;
 			statusItem.Action = new Selector ("HandleMenu");
-		}
-
-		public void ShowPopup(bool show) {
-			var windowFrame = this.window.Frame;
-			windowFrame.Size = size;
-			var itemFrame = ((NSWindow)statusItem.ValueForKey (new NSString ("window"))).Frame;
-
-			// Figure out the h/w of the window. Move it to the left under the menu bar item. 
-			// Then take the half of the widnows bounds and substract it to to align with the rest
-			var popupFrame = new RectangleF ((itemFrame.Left - (windowFrame.Width/2)) + (itemFrame.Width/2), (itemFrame.Top - windowFrame.Height)-5, windowFrame.Width, windowFrame.Height);
-			this.window.SetFrame (popupFrame, false);
-
-			if (!show) {
-				this.window.IsVisible = false;
-				return;
-			}
-
-			NSApplication.SharedApplication.ActivateIgnoringOtherApps (true);
-			this.window.IsVisible = show;
-			this.window.MakeKeyAndOrderFront (null);
 		}
 
 		[Export("HandleMenu")]
@@ -142,6 +122,27 @@ namespace menubar
 				SoundName = NSUserNotification.NSUserNotificationDefaultSoundName,
 			});
 		}
+
+		[Export("showPopup:")]
+		public void ShowPopup(bool show) {
+			var windowFrame = this.window.Frame;
+			windowFrame.Size = size;
+			var itemFrame = ((NSWindow)statusItem.ValueForKey (new NSString ("window"))).Frame;
+
+			// Figure out the h/w of the window. Move it to the left under the menu bar item. 
+			// Then take the half of the widnows bounds and substract it to to align with the rest
+			var popupFrame = new RectangleF ((itemFrame.Left - (windowFrame.Width/2)) + (itemFrame.Width/2), (itemFrame.Top - windowFrame.Height)-5, windowFrame.Width, windowFrame.Height);
+			this.window.SetFrame (popupFrame, false);
+
+			if (!show) {
+				this.window.IsVisible = false;
+				return;
+			}
+
+			NSApplication.SharedApplication.ActivateIgnoringOtherApps (true);
+			this.window.IsVisible = show;
+			this.window.MakeKeyAndOrderFront (null);
+		}
 	
 		[Export("alert:")]
 		public void ShowMessage(NSString title, NSString message){
@@ -164,14 +165,9 @@ namespace menubar
 			pinned = value;
 		}
 
-		[Export("show:")]
-		public void Show(){
-			ShowPopup (true);
-		}
-
-		[Export("hide:")]
-		public void Hide(){
-			ShowPopup (false);
+		[Export("isVisible:")]
+		public bool IsVisible() {
+			return this.window.IsVisible;
 		}
 
 		[Export("resize:")]

@@ -7,13 +7,13 @@
 		<h1>Woop</h1>
 		<script>
 			window.tray.setHotkey({cb: function() {
-				window.tray.show();
+				window.tray.showPopup(true);
 			}});	
 		</script>
 		<button onclick="window.tray.alert('hello','hello')">ALERT</button>
 		<button onclick="window.tray.notify('hello world','yeah')">NOTIFY</button>
-		<button onclick="window.tray.show()">SHOW</button>
-		<button onclick="window.tray.hide()">HIDE</button>
+		<button onclick="window.tray.showPopup(true)">SHOW</button>
+		<button onclick="window.tray.showPopup(hide)">HIDE</button>
 		<button onclick="window.tray.setPinned(true)">PIN</button>
 		<button onclick="window.tray.setPinned(false)">UNPIN</button>
 		<button onclick="window.tray.resize(500,800)">RESIZE</button>
